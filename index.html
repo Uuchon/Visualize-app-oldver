@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WAVE LAB</title>
+<script>
+  // スマホ(画面の短い辺が600px以下のタッチ端末)は、スマホ版ページ(m.html)へ。「PC版」(?pc=1)を選んだときは切り替えない。
+  (function () {
+    try {
+      if (/(?:^|[?&])pc=1(?:&|$)/.test(location.search)) { sessionStorage.setItem('wl_pc', '1'); }
+      var coarse = window.matchMedia('(pointer: coarse)').matches;
+      var phone = (coarse && Math.min(screen.width, screen.height) <= 600) || window.innerWidth <= 600 || (coarse && window.innerHeight <= 500);
+      if (phone && !sessionStorage.getItem('wl_pc')) { location.replace('m.html' + (location.search.replace(/(^|[?&])pc=1/, '') || '')); }
+    } catch (e) {}
+  })();
+</script>
+<style>
+  html, body { margin: 0; padding: 0; overflow: hidden; background: #fafcff; font-family: sans-serif; }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/p5@2.3.4/lib/p5.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/p5.sound@0.4.1/dist/p5.sound.min.js"></script>
+</head>
+<body>
+<script src="nr.js"></script>
+<script src="score.js"></script>
+<script src="sketch.js"></script>
+</body>
+</html>
